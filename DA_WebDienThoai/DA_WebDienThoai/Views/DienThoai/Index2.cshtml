@@ -1,0 +1,45 @@
+﻿@using DA_WebDienThoai.Models;
+@model List<sanpham>
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_GiaoDien.cshtml";
+    List<nhasanxuat> lstNSX = ViewBag.nhasanxuat;
+}
+
+<h2>Index2</h2>
+<div class="row">
+    <div class="col-md">
+        <div class="nav">
+            <ul class="nav">
+                @foreach (nhasanxuat nsx in lstNSX)
+                {
+                    <li class="nav-item col-md">
+                        <button type="button" onclick="location.href='@Url.Action("Index2", "DienThoai", new { id = @nsx.nsx_ma })'">
+                            <img src="~/Content/DA_WebHinhAnh/@nsx.nsx_ten" style="height:40px; width:120px;" />
+                        </button>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="product-group">
+    <div class="row" style="padding-left:50px;">
+        @foreach (sanpham sp in @Model)
+        {
+            <div id="a" class="col-lg-2 card mr-5 ml-5 mt-2 text-center" style="padding-top:20px;">
+                <div id="b" class="card-product">
+                    <img style="width:120px; height:150px;" class="card-img-top mt-2" src="~/Content/DA_WebHinhAnh/@sp.sp_mota" id="hinhanh" />
+                    <div class="card-body">
+                        <h5 style="font-size:18px;" class="card-title"> @sp.sp_ten</h5>
+                        <p style="color:red;">@sp.sp_giatien</p>
+                        @Html.ActionLink("Chi Tiet", "CTDienThoai", "DienThoai", new { id = @sp.sp_ma }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Chon", "Details", "DienThoai", new { id = @sp.sp_ma }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
